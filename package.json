@@ -1,0 +1,13 @@
+{
+  "name": "chrome-block",
+  "version": "0.1.1",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=24" },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "python3 scripts/icons.py && node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "fixtures": "node scripts/fixture-server.mjs"
+  }
+}

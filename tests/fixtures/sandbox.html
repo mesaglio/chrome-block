@@ -1,0 +1,14 @@
+<!doctype html><html lang="es"><meta charset="utf-8"><title>Chrome Block · prueba de sandbox</title>
+<style>body{font:16px system-ui;margin:40px;max-width:900px}iframe{width:100%;height:150px;border:1px solid #ccc}li{padding:6px}.pass{color:green}.fail{color:#b00}</style>
+<h1>Prueba del motor de Chrome</h1><p>Esta página propia prueba la herencia de restricciones de sandbox. No prueba la instalación de la extensión ni reglas DNR.</p>
+<ul id="results"></ul><div id="frames"></div>
+<script>
+const results=document.getElementById('results');
+addEventListener('message',event=>{if(event.data?.test==='chrome-block-fixture'){const li=document.createElement('li');li.className=event.data.ok?'pass':'fail';li.textContent=(event.data.ok?'PASS: ':'FAIL: ')+event.data.name;results.append(li)}});
+const send="function send(name,ok){top.postMessage({test:'chrome-block-fixture',name,ok},'*')}";
+const nested='<script>'+send+"send('frame de otro origen: apertura temprana',window.open('about:blank')===null);"+'<\/script><button onclick="send(\'frame de otro origen: clic\',window.open(\'about:blank\')===null)">Probar clic externo</button>';
+const frame=document.createElement('iframe');
+frame.sandbox='allow-same-origin allow-scripts allow-forms allow-downloads allow-modals allow-presentation allow-top-navigation';
+frame.srcdoc='<script>'+send+"send('documento protegido: apertura temprana',window.open('about:blank')===null);"+'<\/script><button onclick="send(\'documento protegido: clic\',window.open(\'about:blank\')===null)">Probar clic</button><iframe src="data:text/html,'+encodeURIComponent(nested)+'"></iframe>';
+document.getElementById('frames').append(frame);
+</script></html>

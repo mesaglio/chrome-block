@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Chrome Block</title><link rel="stylesheet" href="popup.css"></head>
+<body>
+  <header>
+    <div class="brand-icon" aria-hidden="true"><svg width="24" height="26" viewBox="0 0 24 26" fill="none"><path d="M12 2 3 5v7c0 5 4 9 9 12 5-3 9-7 9-12V5L12 2Z" stroke="currentColor" stroke-width="1.8"/><path d="m8 12 3 3 5-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div><h1>Chrome Block</h1><p>Vos elegís dónde.</p></div><span class="version">0.1.1</span>
+  </header>
+  <main>
+    <section id="statusCard" class="status-card off" aria-live="polite">
+      <div class="eyebrow"><span class="dot"></span><span id="hostname">Cargando página…</span></div>
+      <h2 id="statusTitle">Consultando protección</h2><p id="statusDescription">Un momento.</p>
+    </section>
+    <section class="controls" aria-label="Controles de protección">
+      <label class="control" for="globalSwitch"><span><strong>Protección general</strong><small id="globalDescription">Pausá todo sin perder tus sitios.</small></span><span class="switch"><input id="globalSwitch" type="checkbox" role="switch" aria-describedby="globalDescription" disabled><span aria-hidden="true"></span></span></label>
+      <label class="control" for="siteSwitch"><span><strong>Proteger este sitio</strong><small id="siteDescription">Solo se activa donde vos lo elijas.</small></span><span class="switch"><input id="siteSwitch" type="checkbox" role="switch" aria-describedby="siteDescription" disabled><span aria-hidden="true"></span></span></label>
+    </section>
+    <p class="reload-note">Al cambiar la protección se recargan las pestañas afectadas. El video puede reiniciarse.</p>
+    <div id="message" class="message" role="status" hidden></div>
+    <div class="actions"><button id="permissionButton" class="primary" hidden>Autorizar este sitio</button><button id="retryButton" hidden>Reintentar protección</button><button id="reloadButton" hidden>Recargar esta página</button></div>
+    <section class="activity" aria-labelledby="activityTitle">
+      <div class="section-title"><h2 id="activityTitle">Intentos registrados</h2><span id="count" class="count">0</span></div>
+      <p id="empty" class="empty">Todavía no hay intentos en esta página.</p><ol id="attempts"></ol>
+      <p class="caption">Registro de esta carga. Los intentos dentro de reproductores externos pueden bloquearse sin aparecer acá.</p>
+    </section>
+    <details><summary>Cómo funciona</summary><p>Al activar un sitio, Chrome restringe las nuevas pestañas de esa página y sus reproductores. También puede bloquear aperturas legítimas.</p><p>Podés abrir un destino registrado una sola vez. Los formularios y algunas ventanas no se pueden recuperar.</p><p>Solo pedimos acceso a los sitios que actives. Los destinos quedan en memoria durante esta sesión; no enviamos tu navegación a ningún servidor.</p></details>
+  </main>
+  <footer><span class="privacy-dot" aria-hidden="true"></span>Sin cuenta. Sin seguimiento.</footer>
+  <script type="module" src="popup.js"></script>
+</body></html>
